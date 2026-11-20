@@ -1,4 +1,4 @@
-"""Assemble the reviewed web edition for Render using only Python and Node.js."""
+"""Assemble the reviewed web edition using only Python and Node.js."""
 import json
 from pathlib import Path
 import shutil
