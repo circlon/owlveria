@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: owlveria
+    runtime: static
+    branch: main
+    buildCommand: python3 publishing/build_site.py
+    staticPublishPath: ./public
+    autoDeployTrigger: commit
+    domains:
+      - owlveria.com
+    headers:
+      - path: /downloads/*.epub
+        name: Content-Type
+        value: application/epub+zip
+      - path: /downloads/*.epub
+        name: Content-Disposition
+        value: attachment

@@ -1,23 +1,77 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Owlveria</title>
-<style>
-  body { font: 18px/1.6 Georgia, serif; max-width: 640px; margin: 48px auto; padding: 0 16px; color: #222; background: #fbf8f3; }
-  a { color: #1f3a8a; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7eb">
+  <meta name="description" content="Choose an Owlveria book, explore its hand-drawn world, and take the illustrated EPUB with you. Every language has its own bookshelf.">
+  <link rel="canonical" href="https://owlveria.com/">
+  <link rel="icon" type="image/png" href="assets/art/mark.png">
+  <link rel="stylesheet" href="book.css">
+  <title>Owlveria · Curious little books</title>
+  <script defer src="editions.js"></script>
+  <script defer src="library.js"></script>
+  <script defer src="contours.js"></script>
+  <script defer src="diagrams.js"></script>
+  <script defer src="book.js"></script>
 </head>
 <body>
-<h1>Owlveria</h1>
-<p>Hand-drawn short films about famous things and the surprising stories behind them.</p>
-<ul>
-  <li><a href="https://www.youtube.com/@Owlveria">Owlveria</a> (English)</li>
-  <li><a href="https://www.youtube.com/@OwlveriaES">Owlveria en Español</a></li>
-  <li><a href="https://www.youtube.com/@OwlveriaKR">Owlveria 한국어</a></li>
-  <li><a href="https://www.youtube.com/@OwlveriaJP">Owlveria 日本語</a></li>
-</ul>
-<p><a href="privacy.html">Privacy policy</a> of the Owlveria Uploader app.</p>
+  <a href="#main" class="skip" id="skip">Bookshelf</a>
+  <header class="mast wrap">
+    <a class="wordmark" id="home" href="#en"><img src="assets/art/wordmark.png" alt="Owlveria" width="510" height="142"></a>
+    <button class="language-button" type="button" id="language-open" aria-haspopup="dialog" aria-controls="languages">
+      <span class="mini-books" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span id="language-current">English</span><span class="chevron" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main id="main" tabindex="-1" class="wrap">
+    <section id="library" aria-labelledby="shelf-title">
+      <div class="shelf-grid">
+        <div class="shelf-intro">
+          <h1 id="shelf-title" tabindex="-1">Curious little books</h1>
+          <p id="shelf-intro">A painting walks out of the Louvre. A green statue has a copper past. Pick a cover and follow the drawing.</p>
+          <a class="collect" id="collection-file" href="downloads/owlveria-en.epub" download>
+            <span class="download-icon" aria-hidden="true"></span><span id="collection-label">Both books in one EPUB</span>
+          </a>
+          <div class="pigeon" aria-hidden="true"><img src="assets/art/pigeon.png" alt="" width="161" height="176"></div>
+        </div>
+        <div class="books" id="books"></div>
+      </div>
+    </section>
+
+    <article id="reader" hidden aria-labelledby="story-title">
+      <nav class="reader-tools"><a id="shelf-back" href="#en" class="back-to"><span class="direction back" aria-hidden="true">↗</span><span id="back-label">Bookshelf</span></a>
+        <a id="reader-file" class="file" download><span class="download-icon" aria-hidden="true"></span><span id="reader-save">Download EPUB</span></a>
+      </nav>
+      <div class="story-spread">
+        <div class="left-leaf">
+          <header class="story-head"><p class="place" data-field="place"></p><h1 id="story-title" data-field="title" tabindex="-1"></h1></header>
+          <div class="opening-copy"><p id="lead" data-field="lead"></p><span class="vignette" data-field="spot" aria-hidden="true"></span><p data-field="context"></p></div>
+        </div>
+        <div class="weave">
+          <figure class="plate" id="illustration" data-field="figure">
+            <button id="art-action" class="art-action" data-field="art-action" type="button" aria-describedby="plate-description caption" aria-pressed="false">
+              <span id="plate-art" class="plate-art" data-field="plate" role="img"><span class="ink-drawing" data-field="drawing"></span></span>
+            </button>
+            <figcaption id="caption" data-field="caption"></figcaption>
+          </figure>
+          <p id="passage" data-field="passage" aria-live="polite" aria-atomic="true"></p><p data-field="tail"></p>
+        </div>
+        <p class="source-line" data-field="credit"><a id="source" data-field="source" target="_blank" rel="noopener"><span data-field="source-label"></span> · <span data-field="source-name"></span> <span aria-hidden="true">↗</span></a></p>
+        <div class="drawing-controls"><button class="reveal" id="reveal" data-field="reveal" type="button" aria-controls="passage illustration" aria-pressed="false"><span class="reveal-spark" aria-hidden="true">✳</span><span data-field="action"></span></button><span id="plate-description" data-field="description" class="sr"></span></div>
+      </div>
+      <div class="reader-sizing" id="reader-sizing" aria-hidden="true" inert></div>
+      <nav class="pager" id="pager"><a id="prev"><span class="direction" aria-hidden="true">←</span> <span id="prev-label"></span></a><span id="progress" dir="ltr"></span><a id="next"><span id="next-label"></span> <span class="direction" aria-hidden="true">→</span></a></nav>
+    </article>
+  </main>
+
+  <footer class="wrap colophon"><a href="#en" id="footer-home"><img src="assets/art/mark.png" width="32" height="32" alt=""><span dir="ltr">owlveria.com</span></a><a href="privacy.html" id="privacy">Uploader privacy policy</a></footer>
+
+  <template id="mona-plate"><span class="framed"><img class="portrait" src="assets/art/mona.png" alt=""><img class="frame" src="assets/art/frame.png" alt=""></span></template>
+  <dialog id="languages" aria-labelledby="languages-title">
+    <div class="picker-heading"><h2 id="languages-title">Choose a shelf</h2><button id="language-close" type="button" autofocus aria-label="Close">×</button></div>
+    <div id="language-options"></div>
+  </dialog>
 </body>
 </html>
